@@ -12,7 +12,7 @@ def read_files(original_path: str, copied_path: str) -> Tuple[str, str]:
         with open(copied_path, 'r', encoding=FILE_ENCODING) as f:
             copied_text = f.read().strip()
 
-        # 检查文本长度
+        # 检查文本长度（只进行截取，不阻止处理）
         if len(original_text) > MAX_TEXT_LENGTH:
             print(f"警告: 原文长度({len(original_text)})超过限制，将截取前{MAX_TEXT_LENGTH}字符")
             original_text = original_text[:MAX_TEXT_LENGTH]
