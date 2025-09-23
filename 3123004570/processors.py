@@ -20,7 +20,19 @@ def preprocess(text: str) -> str:
 
 
 def validate_text_length(text: str, min_length: int = MIN_TEXT_LENGTH) -> bool:
-    return len(text) >= min_length
+    """
+    验证文本长度（修改为只进行提示性检查）
+
+    Args:
+        text: 输入文本
+        min_length: 最小长度限制（现在只是提示作用）
+
+    Returns:
+        bool: 总是返回True，因为已取消限制
+    """
+    if len(text) < min_length and min_length > 0:
+        print(f"警告: 文本长度({len(text)})较短，可能影响查重准确性")
+    return True  # 总是返回True，取消限制
 
 
 def split_into_chunks(text: str, chunk_size: int = CHUNK_SIZE, overlap: int = OVERLAP_SIZE) -> list:
