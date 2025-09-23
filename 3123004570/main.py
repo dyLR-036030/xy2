@@ -2,14 +2,11 @@ import sys
 import time
 from file_io import validate_arguments, read_files, write_result
 from processors import preprocess, validate_text_length
-from lcs import calculate_similarity
+from lcs import calculate_similarity  
 from config import MAX_TEXT_LENGTH
 
 
 def main():
-    """
-    主函数
-    """
     try:
         # 验证参数
         original_file, copied_file, output_file = validate_arguments()
@@ -21,9 +18,13 @@ def main():
         print(f"原文长度: {len(original_text)} 字符")
         print(f"抄袭文本长度: {len(copied_text)} 字符")
 
-        # 验证文本长度
-        if not validate_text_length(original_text) or not validate_text_length(copied_text):
-            print("警告: 文本长度过短，可能影响查重准确性")
+        # 验证文本长度（现在只是提示作用）
+        if len(original_text) < 10 or len(copied_text) < 10:
+            print("提示: 文本长度较短，查重结果仅供参考")
+        elif len(original_text) < 100 or len(copied_text) < 100:
+            print("提示: 文本长度适中，查重结果较为准确")
+        else:
+            print("提示: 文本长度充足，查重结果准确度较高")
 
         # 预处理文本
         print("正在预处理文本...")
@@ -46,7 +47,7 @@ def main():
 
         # 输出结果
         write_result(output_file, similarity_rate)
-        print(f"查重完成！相似度: {similarity_rate:.2f}")  # 修改为小数点格式
+        print(f"查重完成！相似度: {similarity_rate:.2f}")
         print(f"结果已保存到: {output_file}")
 
     except ValueError as e:
